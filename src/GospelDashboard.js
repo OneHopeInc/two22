@@ -51,6 +51,15 @@ function GospelDashboard(props) {
       )
     }
   }
+
+  function currentTotal() {
+    var total = 0
+    for (var i = 0; i < props.stats.countries.length; i++) {
+      total += props.stats.countries[i].presentations.total
+    }
+    return total
+  }
+
   return (
     <div>
       <h3>Gospel Dashboard </h3>
@@ -59,6 +68,12 @@ function GospelDashboard(props) {
 
       {props.stats.countries ? (
         <div>
+          <div>
+            <h3>
+              {' '}
+              Presention Goal: {currentTotal()}/{props.stats.presentationGoal}
+            </h3>
+          </div>
           <List>
             {props.stats.countries.map((country, id) => (
               <ListItem key={id}>
@@ -79,10 +94,6 @@ function GospelDashboard(props) {
               </ListItem>
             ))}
           </List>
-
-          <div>
-            <h3> Presention Goal: {props.stats.presentationGoal}</h3>
-          </div>
         </div>
       ) : (
         <div>No Data Available</div>
