@@ -21,31 +21,24 @@ function App() {
   useEffect(() => {
     let user = JSON.parse(window.localStorage.getItem('CAYM_user'))
     if (user) {
-      setState({
-        authenticatedUser: {
-          email: user.email,
-          phoneNumber: user.phoneNumber
-        },
-        isAuthenticated: true
-      })
-
-      let identity = {
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        securityKey: Constants.securityKey
-      }
-
       axios.defaults.headers['Content-Type'] =
         'application/x-www-form-urlencoded'
 
       axios
         .post(Constants.url + '/statistics', {
-          identity
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          securityKey: Constants.securityKey
         })
         .then(function(res) {
-          if (res === 200) {
+          if (res.status === 200) {
             setState({
-              statistics: JSON.parse(res.data)
+              statistics: res.data,
+              authenticatedUser: {
+                email: user.email,
+                phoneNumber: user.phoneNumber
+              },
+              isAuthenticated: true
             })
           }
         })

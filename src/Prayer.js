@@ -8,7 +8,7 @@ function Prayer(props) {
   return (
     <div>
       <SimpleTabs
-        dashboard={<PrayerDashboard stats={props.statistics} />}
+        dashboard={<PrayerDashboard stats={props.stats} />}
         tracker={<PrayerTracker user={props.user} />}
       />
     </div>
