@@ -10,47 +10,81 @@ import Login from './LogIn'
 import axios from 'axios'
 import * as Constants from './constants'
 
-import * as Reducers from './reducers'
-
-const UserContext = React.createContext()
-
 function App() {
-  const [state, dispatch] = React.useReducer(
-    Reducers.reducer,
-    Reducers.initialState
-  )
+  const [state, setState] = React.useState({
+    authenticatedUser: {},
+    isAuthenticated: false,
+    statistics: {}
+  })
 
   // // // Similar to componentDidMount and componentDidUpdate:
-  // useEffect(() => {
+  useEffect(() => {
+    let user = JSON.parse(window.localStorage.getItem('CAYM_user'))
+    if (user) {
+      setState({
+        authenticatedUser: {
+          email: user.email,
+          phoneNumber: user.phoneNumber
+        },
+        isAuthenticated: true
+      })
 
-  // })
+      let identity = {
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        securityKey: Constants.securityKey
+      }
 
-  return (
-    <UserContext.Provider value={Reducers.initialState}>
-      <UserContext.Consumer>
-        {user =>
-          user.isAuthenticated ? (
-            <Router>
-              <div className="App">
-                <Layout>
-                  <Route
-                    path="/"
-                    exact
-                    render={props => <Gospel {...props} UserContext={user} />}
-                  />
-                  <Route
-                    path="/prayer/"
-                    render={props => <Prayer {...props} UserContext={user} />}
-                  />
-                </Layout>
-              </div>
-            </Router>
-          ) : (
-            <Login />
-          )
-        }
-      </UserContext.Consumer>
-    </UserContext.Provider>
+      axios.defaults.headers['Content-Type'] =
+        'application/x-www-form-urlencoded'
+
+      axios
+        .post(Constants.url + '/statistics', {
+          identity
+        })
+        .then(function(res) {
+          if (res === 200) {
+            setState({
+              statistics: JSON.parse(res.data)
+            })
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    }
+  }, [])
+
+  return state.isAuthenticated ? (
+    <Router>
+      <div className="App">
+        <Layout>
+          <Route
+            path="/"
+            exact
+            render={props => (
+              <Gospel
+                {...props}
+                user={state.authenticatedUser}
+                stats={state.statistics}
+              />
+            )}
+          />
+          <Route
+            path="/prayer/"
+            render={props => (
+              <Prayer
+                {...props}
+                user={state.authenticatedUser}
+                stats={state.statistics}
+              />
+            )}
+          />
+        </Layout>
+      </div>
+    </Router>
+  ) : (
+    <Login />
   )
 }
 

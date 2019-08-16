@@ -7,6 +7,10 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import SimpleBottomNavigation from './BottomNavigation'
+
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+
 import Theme from './Theme'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 
@@ -24,6 +28,20 @@ const useStyles = makeStyles(theme => ({
 
 function Layout(props) {
   const classes = useStyles()
+  const [anchorEl, setAnchorEl] = React.useState(null)
+
+  function handleClick(event) {
+    setAnchorEl(event.currentTarget)
+  }
+
+  function handleClose() {
+    setAnchorEl(null)
+  }
+
+  function handleLogout() {
+    localStorage.removeItem('CAYM_user')
+    window.location.reload()
+  }
 
   return (
     <MuiThemeProvider theme={Theme}>
@@ -36,11 +54,21 @@ function Layout(props) {
                 className={classes.menuButton}
                 color="inherit"
                 aria-label="menu"
+                onClick={handleClick}
               >
                 <MenuIcon />
               </IconButton>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
               <Typography variant="h6" className={classes.title}>
-                Two22
+                CAYM
               </Typography>
               <Button color="inherit" />
             </Toolbar>

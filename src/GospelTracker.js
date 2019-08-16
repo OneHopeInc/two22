@@ -19,7 +19,6 @@ import Kazakhstan from './assets/Kazakhstan.png'
 import axios from 'axios'
 
 import * as Constants from './constants'
-import * as Reducers from './reducers'
 
 const GreenTextField = withStyles({
   root: {
@@ -42,58 +41,52 @@ const Label = props => (
   <span style={{ paddingRight: props.padding }}> {props.text}</span>
 )
 
-function GospelTracker() {
-  const [state, dispatch] = React.useReducer(
-    Reducers.reducer,
-    Reducers.initialState
-  )
-  // console.log('state', state)
-  const [values, setValue] = React.useState({
+function GospelTracker(props) {
+  const [state, setState] = React.useState({
     KG: 0,
     KZ: 0,
     TJ: 0,
     TM: 0,
-    UZ: 0
+    UZ: 0,
+    isSubmitted: false
   })
 
   const handleChange = name => event => {
-    setValue({ ...values, [name]: event.target.value })
+    setState({ ...state, [name]: event.target.value })
   }
 
   const submitGospel = () => {
-    let data = [
-      { countryCode: 'KG', presentations: values.KG },
-      { countryCode: 'KZ', presentations: values.KZ },
-      { countryCode: 'TJ', presentations: values.TJ },
-      { countryCode: 'TM', presentations: values.TM },
-      { countryCode: 'UZ', presentations: values.UZ }
+    let countryData = [
+      { countryCode: 'KG', presentations: state.KG },
+      { countryCode: 'KZ', presentations: state.KZ },
+      { countryCode: 'TJ', presentations: state.TJ },
+      { countryCode: 'TM', presentations: state.TM },
+      { countryCode: 'UZ', presentations: state.UZ }
     ]
 
-    let countryData = JSON.stringify(data)
+    let identity = {
+      email: props.user.email,
+      phoneNumber: props.user.phoneNumber,
+      securityKey: Constants.securityKey
+    }
 
-    console.log(countryData)
+    axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
 
-    // axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-    // axios.defaults.withCredentials = true
-
-    // axios
-    //   .post(Constants.url + '/data', {
-    //     countryData
-    //   })
-    //   .then(function(res) {
-    //     console.log(res)
-    //     if (res === '200') {
-    //       dispatch({
-    //         type: 'gospelSubmitted',
-    //         payload: {
-    //           gospelSubmitted: true
-    //         }
-    //       })
-    //     }
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error)
-    //   })
+    axios
+      .post(Constants.url + '/presentations', {
+        identity,
+        countryData
+      })
+      .then(function(res) {
+        if (res === 200) {
+          setState({
+            isSubmitted: true
+          })
+        }
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   }
 
   return (
@@ -109,7 +102,7 @@ function GospelTracker() {
                 <GreenTextField
                   id="outlined-number"
                   label="Number"
-                  value={values.KG}
+                  value={state.KG}
                   onChange={handleChange('KG')}
                   type="number"
                   InputLabelProps={{
@@ -134,7 +127,7 @@ function GospelTracker() {
                 <GreenTextField
                   id="outlined-number"
                   label="Number"
-                  value={values.KZ}
+                  value={state.KZ}
                   onChange={handleChange('KZ')}
                   type="number"
                   InputLabelProps={{
@@ -159,7 +152,7 @@ function GospelTracker() {
                 <GreenTextField
                   id="outlined-number"
                   label="Number"
-                  value={values.TJ}
+                  value={state.TJ}
                   onChange={handleChange('TJ')}
                   type="number"
                   InputLabelProps={{
@@ -188,7 +181,7 @@ function GospelTracker() {
                 <GreenTextField
                   id="outlined-number"
                   label="Number"
-                  value={values.TM}
+                  value={state.TM}
                   onChange={handleChange('TM')}
                   type="number"
                   InputLabelProps={{
@@ -213,7 +206,7 @@ function GospelTracker() {
                 <GreenTextField
                   id="outlined-number"
                   label="Number"
-                  value={values.UZ}
+                  value={state.UZ}
                   onChange={handleChange('UZ')}
                   type="number"
                   InputLabelProps={{
@@ -231,13 +224,19 @@ function GospelTracker() {
         </FormGroup>
       </div>
       <br />
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={() => submitGospel()}
-      >
-        Submit
-      </Button>
+      {state.isSubmitted ? (
+        <Button variant="contained" color="primary" disabled>
+          Submitted Succesfully!
+        </Button>
+      ) : (
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => submitGospel()}
+        >
+          Submit
+        </Button>
+      )}
     </div>
   )
 }

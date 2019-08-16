@@ -5,10 +5,12 @@ import GospelDashboard from './GospelDashboard'
 import GospelTracker from './GospelTracker'
 
 function Gospel(props) {
-  console.log(props)
   return (
     <div>
-      <SimpleTabs dashboard={<GospelDashboard />} tracker={<GospelTracker />} />
+      <SimpleTabs
+        dashboard={<GospelDashboard stats={props.statistics} />}
+        tracker={<GospelTracker user={props.user} />}
+      />
     </div>
   )
 }

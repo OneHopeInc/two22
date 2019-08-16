@@ -18,7 +18,6 @@ import Kazakhstan from './assets/Kazakhstan.png'
 import axios from 'axios'
 
 import * as Constants from './constants'
-import * as Reducers from './reducers'
 
 const GreenCheckbox = withStyles({
   root: {
@@ -34,57 +33,52 @@ const Label = props => (
   <span style={{ paddingRight: props.padding }}> {props.text}</span>
 )
 
-function GospelTracker() {
-  const [state, dispatch] = React.useReducer(
-    Reducers.reducer,
-    Reducers.initialState
-  )
-
-  const [values, setValue] = React.useState({
+function GospelTracker(props) {
+  const [state, setState] = React.useState({
     KG: false,
     KZ: false,
     TJ: false,
     TM: false,
-    UZ: false
+    UZ: false,
+    isSubmitted: false
   })
 
   const handleChange = name => event => {
-    setValue({ ...values, [name]: event.target.checked })
+    setState({ ...state, [name]: event.target.checked })
   }
 
   const submitPrayer = () => {
-    let data = [
-      { countryCode: 'KG', prayer: values.KG },
-      { countryCode: 'KZ', prayer: values.KZ },
-      { countryCode: 'TJ', prayer: values.TJ },
-      { countryCode: 'TM', prayer: values.TM },
-      { countryCode: 'UZ', prayer: values.UZ }
+    let countryData = [
+      { countryCode: 'KG', prayer: state.KG },
+      { countryCode: 'KZ', prayer: state.KZ },
+      { countryCode: 'TJ', prayer: state.TJ },
+      { countryCode: 'TM', prayer: state.TM },
+      { countryCode: 'UZ', prayer: state.UZ }
     ]
 
-    let countryData = JSON.stringify(data)
-    console.log(countryData)
+    let identity = {
+      email: props.user.email,
+      phoneNumber: props.user.phoneNumber,
+      securityKey: Constants.securityKey
+    }
 
-    // axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-    // axios.defaults.withCredentials = true
+    axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
 
-    // axios
-    //   .post(Constants.url + '/data', {
-    //     countryData
-    //   })
-    //   .then(function(res) {
-    //     console.log(res)
-    //     if (res === '200') {
-    //       dispatch({
-    //         type: 'gospelSubmitted',
-    //         payload: {
-    //           gospelSubmitted: true
-    //         }
-    //       })
-    //     }
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error)
-    //   })
+    axios
+      .post(Constants.url + '/prayer', {
+        identity,
+        countryData
+      })
+      .then(function(res) {
+        if (res === 200) {
+          setState({
+            isSubmitted: true
+          })
+        }
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   }
 
   return (
@@ -98,9 +92,9 @@ function GospelTracker() {
             <FormControlLabel
               control={
                 <GreenCheckbox
-                  checked={values.KG}
+                  checked={state.KG}
                   onChange={handleChange('KG')}
-                  value="KG"
+                  state="KG"
                   inputProps={{ 'aria-label': 'Kyrgyzstan' }}
                 />
               }
@@ -116,9 +110,9 @@ function GospelTracker() {
             <FormControlLabel
               control={
                 <GreenCheckbox
-                  checked={values.KZ}
+                  checked={state.KZ}
                   onChange={handleChange('KZ')}
-                  value="KZ"
+                  state="KZ"
                   inputProps={{ 'aria-label': 'Kazakhstan' }}
                 />
               }
@@ -134,9 +128,9 @@ function GospelTracker() {
             <FormControlLabel
               control={
                 <GreenCheckbox
-                  checked={values.TJ}
+                  checked={state.TJ}
                   onChange={handleChange('TJ')}
-                  value="TJ"
+                  state="TJ"
                   inputProps={{ 'aria-label': 'Tajikistan' }}
                 />
               }
@@ -156,9 +150,9 @@ function GospelTracker() {
             <FormControlLabel
               control={
                 <GreenCheckbox
-                  checked={values.TM}
+                  checked={state.TM}
                   onChange={handleChange('TM')}
-                  value="TM"
+                  state="TM"
                   inputProps={{ 'aria-label': 'Turkmenistan' }}
                 />
               }
@@ -174,9 +168,9 @@ function GospelTracker() {
             <FormControlLabel
               control={
                 <GreenCheckbox
-                  checked={values.UZ}
+                  checked={state.UZ}
                   onChange={handleChange('UZ')}
-                  value="UZ"
+                  state="UZ"
                   inputProps={{ 'aria-label': 'Uzbekistan' }}
                 />
               }
@@ -187,13 +181,19 @@ function GospelTracker() {
         </FormGroup>
       </div>
       <br />
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={() => submitPrayer()}
-      >
-        Submit
-      </Button>
+      {state.isSubmitted ? (
+        <Button variant="contained" color="primary" disabled>
+          Submitted Succesfully!
+        </Button>
+      ) : (
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => submitPrayer()}
+        >
+          Submit
+        </Button>
+      )}
     </div>
   )
 }
