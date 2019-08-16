@@ -78,7 +78,7 @@ function GospelTracker(props) {
         countryData
       })
       .then(function(res) {
-        if (res === 200) {
+        if (res.status === 200) {
           setState({
             isSubmitted: true
           })
