@@ -156,7 +156,7 @@ function Login(props) {
             </Button>
           </form>
         </div>
-        <p>Powered by TWO22</p>
+        <p>Powered by TWO22 Movement</p>
       </div>
     </MuiThemeProvider>
   )
