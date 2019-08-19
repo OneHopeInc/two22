@@ -57,6 +57,7 @@ function Login(props) {
     isAuthenticated: false,
     isError: false
   })
+  console.log('state', state)
 
   const handleChange = name => event => {
     setstate({ ...state, [name]: event.target.value })
@@ -86,6 +87,7 @@ function Login(props) {
       })
       .catch(function(error) {
         setstate({
+          ...state,
           isError: true,
           errorMsg: 'The email or phone number is missing or invalid.'
         })
