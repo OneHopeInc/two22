@@ -117,6 +117,11 @@ function Login(props) {
             ''
           )}
 
+          <a href="https://caym.netlify.com" className="custom-link">
+            {' '}
+            In Russian
+          </a>
+
           <form className={classes.container} noValidate>
             <Paper className={classes.root}>
               <TextField
