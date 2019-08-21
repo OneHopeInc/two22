@@ -98,7 +98,7 @@ function GospelTracker(props) {
                   inputProps={{ 'aria-label': 'Кыргызстан' }}
                 />
               }
-              label={<Label text="Кыргызстан" padding={80} />}
+              label={<Label text="Кыргызстан" padding={70} />}
               labelPlacement="start"
             />
           </FormControl>
@@ -116,7 +116,7 @@ function GospelTracker(props) {
                   inputProps={{ 'aria-label': 'Казахстан' }}
                 />
               }
-              label={<Label text="Казахстан" padding={73} />}
+              label={<Label text="Казахстан" padding={85} />}
               labelPlacement="start"
             />
           </FormControl>
@@ -138,7 +138,7 @@ function GospelTracker(props) {
                   inputProps={{ 'aria-label': 'Таджикистан' }}
                 />
               }
-              label={<Label text="Таджикистан" padding={90} />}
+              label={<Label text="Таджикистан" padding={60} />}
               labelPlacement="start"
             />
           </FormControl>
@@ -160,7 +160,7 @@ function GospelTracker(props) {
                   inputProps={{ 'aria-label': 'Туркменистан' }}
                 />
               }
-              label={<Label text="Туркменистан" padding={60} />}
+              label={<Label text="Туркменистан" padding={55} />}
               labelPlacement="start"
             />
           </FormControl>
@@ -178,7 +178,7 @@ function GospelTracker(props) {
                   inputProps={{ 'aria-label': 'Узбекистан' }}
                 />
               }
-              label={<Label text="Узбекистан" padding={78} />}
+              label={<Label text="Узбекистан" padding={75} />}
               labelPlacement="start"
             />
           </FormControl>
