@@ -19,8 +19,9 @@ function App() {
 
   // // // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
-    let user = JSON.parse(window.localStorage.getItem('CAYM_user'))
+    let user = window.localStorage.getItem('CAYM_user')
     if (user) {
+      user = JSON.parse(user)
       axios.defaults.headers['Content-Type'] =
         'application/x-www-form-urlencoded'
 
