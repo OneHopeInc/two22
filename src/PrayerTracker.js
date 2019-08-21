@@ -195,7 +195,7 @@ function GospelTracker(props) {
           color="secondary"
           onClick={() => submitPrayer()}
         >
-          Submit
+          Отправить
         </Button>
       )}
     </div>

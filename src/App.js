@@ -19,7 +19,7 @@ function App() {
 
   // // // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
-    let user = window.localStorage.getItem('CAYM_user')
+    let user = localStorage.getItem('CAYM_user')
     if (user) {
       user = JSON.parse(user)
       axios.defaults.headers['Content-Type'] =

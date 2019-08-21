@@ -43,6 +43,10 @@ function Layout(props) {
     window.location.reload()
   }
 
+  function handleTranslate() {
+    window.location.assign('https://caymeng.netlify.com')
+  }
+
   return (
     <MuiThemeProvider theme={Theme}>
       <div className="Layout">
@@ -66,6 +70,7 @@ function Layout(props) {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem onClick={handleTranslate}>English</MenuItem>
               </Menu>
               <Typography variant="h6" className={classes.title}>
                 CAYM
