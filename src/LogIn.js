@@ -16,6 +16,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles'
 import axios from 'axios'
 
 import logo from './assets/CentralAsia.png'
+import two22 from './assets/two22.png'
 import Theme from './Components/Theme'
 import * as Constants from './constants'
 import './App.css'
@@ -57,7 +58,6 @@ function Login(props) {
     isAuthenticated: false,
     isError: false
   })
-  console.log('state', state)
 
   const handleChange = name => event => {
     setstate({ ...state, [name]: event.target.value })
@@ -79,24 +79,32 @@ function Login(props) {
         securityKey: Constants.securityKey
       })
       .then(function(res) {
-        console.log(res.status)
         if (res.status === 200) {
           localStorage.setItem('CAYM_user', userString)
           window.location.reload()
         }
       })
       .catch(function(error) {
-        setstate({
-          ...state,
-          isError: true,
-          errorMsg: 'The email or phone number is missing or invalid.'
-        })
+        if (error.message === 'Request failed with status code 400') {
+          setstate({
+            ...state,
+            isError: true,
+            errorMsg: 'The email or phone number is missing or invalid.'
+          })
+        } else if (error.message === 'Request failed with status code 404') {
+          setstate({
+            ...state,
+            isError: true,
+            errorMsg:
+              'The server is temporarily unavailable. Please try again in a few minutes.'
+          })
+        }
       })
   }
   return (
     <MuiThemeProvider theme={Theme}>
       <div className="appBkg">
-        <img src={logo} />
+        <img src={logo} alt="Central Asia Youth Movement" />
         <h1 className="appName">
           Central Asia <br />
           Youth Movement
@@ -158,7 +166,8 @@ function Login(props) {
             </Button>
           </form>
         </div>
-        <p>Powered by TWO22 Movement</p>
+        <p>Powered by</p>
+        <img src={two22} alt="TWO22" className="two22_logo" />
       </div>
     </MuiThemeProvider>
   )
