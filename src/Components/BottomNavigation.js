@@ -47,7 +47,7 @@ export default function SimpleBottomNavigation() {
       <BottomNavigationAction
         component={Link}
         to="/"
-        label="Gospel"
+        label="Благовестие"
         value="gospel"
         icon={<img alt="gospel" src={BibleIcon} className="iconImg" />}
         classes={{
@@ -58,7 +58,7 @@ export default function SimpleBottomNavigation() {
       <BottomNavigationAction
         component={Link}
         to="/prayer"
-        label="Prayer"
+        label="Молитва"
         value="prayer"
         icon={<img alt="prayer" src={PrayerIcon} className="iconImg" />}
         classes={{

@@ -63,8 +63,8 @@ export default function SimpleTabs(props) {
           aria-label="simple tabs example"
           variant="fullWidth"
         >
-          <Tab label="Tracker" {...a11yProps(0)} />
-          <Tab label="Dashboard" {...a11yProps(1)} />
+          <Tab label="Трекер" {...a11yProps(0)} />
+          <Tab label="Панель" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

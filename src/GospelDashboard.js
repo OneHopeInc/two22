@@ -62,16 +62,16 @@ function GospelDashboard(props) {
 
   return (
     <div>
-      <h3>Gospel Dashboard </h3>
+      <h3>Панель Благовестие </h3>
       <hr />
-      <h5>Gospel Presentations By Country</h5>
+      <h5>Презентации Евангелия по странам</h5>
 
       {props.stats.countries ? (
         <div>
           <div>
             <h3>
               {' '}
-              Presention Goal: {currentTotal()}/{props.stats.presentationGoal}
+              Достигаемая цель: {currentTotal()}/{props.stats.presentationGoal}
             </h3>
           </div>
           <List>
@@ -83,11 +83,11 @@ function GospelDashboard(props) {
                   secondary={
                     <span style={{ color: '#9e9e9e' }}>
                       {' '}
-                      Day: {country.presentations.day} <br />
-                      Week: {country.presentations.week} <br />
-                      Month: {country.presentations.month} <br />
-                      Year: {country.presentations.year} <br />
-                      Total: {country.presentations.total}
+                      День: {country.presentations.day} <br />
+                      Неделя: {country.presentations.week} <br />
+                      Месяц: {country.presentations.month} <br />
+                      Год: {country.presentations.year} <br />
+                      Всего: {country.presentations.total}
                     </span>
                   }
                 />

@@ -53,7 +53,7 @@ function PrayerDashboard(props) {
   }
   return (
     <div>
-      <h3>Prayer Dashboard </h3>
+      <h3>Панель Молитва </h3>
       <hr />
 
       {props.stats.countries ? (
@@ -69,11 +69,11 @@ function PrayerDashboard(props) {
                   secondary={
                     <span style={{ color: '#9e9e9e' }}>
                       {' '}
-                      Day: {country.presentations.day} <br />
-                      Week: {country.presentations.week} <br />
-                      Month: {country.presentations.month} <br />
-                      Year: {country.presentations.year} <br />
-                      Total: {country.presentations.total}
+                      День: {country.presentations.day} <br />
+                      Неделя: {country.presentations.week} <br />
+                      Месяц: {country.presentations.month} <br />
+                      Год: {country.presentations.year} <br />
+                      Всего: {country.presentations.total}
                     </span>
                   }
                 />

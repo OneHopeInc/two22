@@ -83,11 +83,11 @@ function GospelTracker(props) {
 
   return (
     <div>
-      <h3>Prayer Tracker </h3>
+      <h3>Трекер молитв </h3>
       <hr />
       <div className="listContainer">
         <FormGroup row className="form-row-2">
-          <img src={Kyrgyzstan} alt="Kyrgyzstan" className="flag countryFlag" />
+          <img src={Kyrgyzstan} alt="Кыргызстан" className="flag countryFlag" />
           <FormControl margin="dense">
             <FormControlLabel
               control={
@@ -95,17 +95,17 @@ function GospelTracker(props) {
                   checked={state.KG}
                   onChange={handleChange('KG')}
                   state="KG"
-                  inputProps={{ 'aria-label': 'Kyrgyzstan' }}
+                  inputProps={{ 'aria-label': 'Кыргызстан' }}
                 />
               }
-              label={<Label text="Kyrgyzstan" padding={80} />}
+              label={<Label text="Кыргызстан" padding={80} />}
               labelPlacement="start"
             />
           </FormControl>
         </FormGroup>
 
         <FormGroup row className="form-row-2">
-          <img src={Kazakhstan} alt="Kazakhstan" className="flag countryFlag" />
+          <img src={Kazakhstan} alt="Казахстан" className="flag countryFlag" />
           <FormControl margin="dense">
             <FormControlLabel
               control={
@@ -113,17 +113,21 @@ function GospelTracker(props) {
                   checked={state.KZ}
                   onChange={handleChange('KZ')}
                   state="KZ"
-                  inputProps={{ 'aria-label': 'Kazakhstan' }}
+                  inputProps={{ 'aria-label': 'Казахстан' }}
                 />
               }
-              label={<Label text="Kazakhstan" padding={73} />}
+              label={<Label text="Казахстан" padding={73} />}
               labelPlacement="start"
             />
           </FormControl>
         </FormGroup>
 
         <FormGroup row className="form-row-2">
-          <img src={Tajikistan} alt="Tajikistan" className="flag countryFlag" />
+          <img
+            src={Tajikistan}
+            alt="Таджикистан"
+            className="flag countryFlag"
+          />
           <FormControl margin="dense">
             <FormControlLabel
               control={
@@ -131,10 +135,10 @@ function GospelTracker(props) {
                   checked={state.TJ}
                   onChange={handleChange('TJ')}
                   state="TJ"
-                  inputProps={{ 'aria-label': 'Tajikistan' }}
+                  inputProps={{ 'aria-label': 'Таджикистан' }}
                 />
               }
-              label={<Label text="Tajikistan" padding={90} />}
+              label={<Label text="Таджикистан" padding={90} />}
               labelPlacement="start"
             />
           </FormControl>
@@ -143,7 +147,7 @@ function GospelTracker(props) {
         <FormGroup row className="form-row-2">
           <img
             src={Turkmenistan}
-            alt="Turkmenistan"
+            alt="Туркменистан"
             className="flag countryFlag"
           />
           <FormControl margin="dense">
@@ -153,17 +157,17 @@ function GospelTracker(props) {
                   checked={state.TM}
                   onChange={handleChange('TM')}
                   state="TM"
-                  inputProps={{ 'aria-label': 'Turkmenistan' }}
+                  inputProps={{ 'aria-label': 'Туркменистан' }}
                 />
               }
-              label={<Label text="Turkmenistan" padding={60} />}
+              label={<Label text="Туркменистан" padding={60} />}
               labelPlacement="start"
             />
           </FormControl>
         </FormGroup>
 
         <FormGroup row className="form-row-2">
-          <img src={Uzbekistan} alt="Uzbekistan" className="flag countryFlag" />
+          <img src={Uzbekistan} alt="Узбекистан" className="flag countryFlag" />
           <FormControl margin="dense">
             <FormControlLabel
               control={
@@ -171,10 +175,10 @@ function GospelTracker(props) {
                   checked={state.UZ}
                   onChange={handleChange('UZ')}
                   state="UZ"
-                  inputProps={{ 'aria-label': 'Uzbekistan' }}
+                  inputProps={{ 'aria-label': 'Узбекистан' }}
                 />
               }
-              label={<Label text="Uzbekistan" padding={78} />}
+              label={<Label text="Узбекистан" padding={78} />}
               labelPlacement="start"
             />
           </FormControl>

@@ -33,6 +33,7 @@ function App() {
         })
         .then(function(res) {
           if (res.status === 200) {
+            console.log(res.data)
             setState({
               statistics: res.data,
               authenticatedUser: {
