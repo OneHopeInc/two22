@@ -69,11 +69,11 @@ function PrayerDashboard(props) {
                   secondary={
                     <span style={{ color: '#9e9e9e' }}>
                       {' '}
-                      Day: {country.presentations.day} <br />
-                      Week: {country.presentations.week} <br />
-                      Month: {country.presentations.month} <br />
-                      Year: {country.presentations.year} <br />
-                      Total: {country.presentations.total}
+                      {/* Day: {country.prayer.day} <br /> */}
+                      Week: {country.prayer.week} <br />
+                      Month: {country.prayer.month} <br />
+                      Year: {country.prayer.year} <br />
+                      Total: {country.prayer.total}
                     </span>
                   }
                 />

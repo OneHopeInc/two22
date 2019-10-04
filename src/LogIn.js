@@ -5,7 +5,7 @@ import {
   Link,
   Redirect
 } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -41,13 +41,40 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: '90%',
-    color: '#fff'
+    width: '95%'
   },
   dense: {
     marginTop: theme.spacing(2)
   }
 }))
+
+const CssTextField = withStyles({
+  root: {
+    '& .MuiInputBase-root': {
+      color: 'white'
+    },
+    '& label': {
+      color: 'white'
+    },
+    '& label.Mui-focused': {
+      color: 'white'
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'white'
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'white'
+      },
+      '&:hover fieldset': {
+        borderColor: 'white'
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white'
+      }
+    }
+  }
+})(TextField)
 
 function Login(props) {
   const classes = useStyles()
@@ -123,44 +150,40 @@ function Login(props) {
           </a>
 
           <form className={classes.container} noValidate>
-            <Paper className={classes.root}>
-              <TextField
-                id="outlined-name"
-                label="Email"
-                className={classes.textField}
-                value={state.email}
-                onChange={handleChange('email')}
-                margin="normal"
-                variant="outlined"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <EmailIcon />
-                    </InputAdornment>
-                  ),
-                  'aria-label': 'Email'
-                }}
-              />
-            </Paper>
-            <Paper className={classes.root}>
-              <TextField
-                id="outlined-name"
-                label="Phone"
-                className={classes.textField}
-                value={state.phoneNumber}
-                onChange={handleChange('phoneNumber')}
-                margin="normal"
-                variant="outlined"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PhoneIcon />
-                    </InputAdornment>
-                  ),
-                  'aria-label': 'Phone Number'
-                }}
-              />
-            </Paper>
+            <CssTextField
+              id="outlined-name"
+              label="Email"
+              className={classes.textField}
+              value={state.email}
+              onChange={handleChange('email')}
+              margin="normal"
+              variant="outlined"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <EmailIcon />
+                  </InputAdornment>
+                ),
+                'aria-label': 'Email'
+              }}
+            />
+            <CssTextField
+              id="outlined-name"
+              label="Phone"
+              className={classes.textField}
+              value={state.phoneNumber}
+              onChange={handleChange('phoneNumber')}
+              margin="normal"
+              variant="outlined"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PhoneIcon />
+                  </InputAdornment>
+                ),
+                'aria-label': 'Phone Number'
+              }}
+            />
             <Button
               variant="contained"
               color="secondary"
@@ -171,7 +194,7 @@ function Login(props) {
             </Button>
           </form>
         </div>
-        <p>Powered by</p>
+        <p>Powered by TWO22</p>
         <img src={two22} alt="TWO22" className="two22_logo" />
       </div>
     </MuiThemeProvider>
