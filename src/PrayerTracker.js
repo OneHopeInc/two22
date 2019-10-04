@@ -187,7 +187,7 @@ function GospelTracker(props) {
       <br />
       {state.isSubmitted ? (
         <Button variant="contained" color="primary" disabled>
-          Submitted Succesfully!
+          Отправлено успешно
         </Button>
       ) : (
         <Button

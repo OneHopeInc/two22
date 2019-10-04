@@ -69,7 +69,7 @@ function Layout(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout}>Выйти</MenuItem>
                 <MenuItem onClick={handleTranslate}>English</MenuItem>
               </Menu>
               <Typography variant="h6" className={classes.title}>
